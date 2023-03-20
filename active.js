@@ -1,54 +1,64 @@
-const courseSelectedSubmitButton = document.querySelector('[data-course-select-submit-button]')
+const inputForm = document.querySelector('[data-create-form]')
+const formSubmitButton = document.querySelector('[data-from-submit-button]');
+const scoreCardContainer = document.querySelector('[data-score-card-container]')
 
 let courseSelectDropdown = document.querySelector('[data-course-dropdown]');
+let playerNameInput = document.querySelector('[data-player-name]');
+let playerSkillDropdown = document.querySelector('[data-player-Skill-dropdown]');
+let currentPlayerName = playerName;
 
+// Gets User Input Data
+function onCourseId() {
+    let newCourseId = courseSelectDropdown.value
+    return newCourseId;
+}
+    function onCourseName() {
+        let newCourseName = courseSelectDropdown.options[courseSelectDropdown.selectedIndex].text;
+        return newCourseName;
+    }
+        function onPlayerName() {
+            let newPlayerName = playerNameInput.value;
+            return newPlayerName;
+        }
+            function onPlayerSkill() {
+                let newPlayerSkill = playerSkillDropdown.options[playerSkillDropdown.selectedIndex].text;
+                return newPlayerSkill;
+            }
 
-let coursePlaying = null;
-let players = [];
-
-courseSelectedSubmitButton.addEventListener('click', function () {
-    onCourseSelected();
+// Prevents page reload, and runs RenderFunctions. As well as saves user info to local storage 
+inputForm.addEventListener('submit', function(event) {
+    event.preventDefault();
 })
+    formSubmitButton.addEventListener('click', function() {
+        console.log('Form Submitted');
 
-function onCourseSelected () {
-    let courseId = courseSelectDropdown.options[courseSelectDropdown.selectedIndex].value;
-    let courseName = courseSelectDropdown.options[courseSelectDropdown.selectedIndex].text;
-    console.log(`Selected Couse is: ${courseName}- ${courseId}`)
+        localStorage.setItem('playerName', onPlayerName());
+        localStorage.setItem('playerSkill', onPlayerSkill());
+        localStorage.setItem('courseName', onCourseName());
+        localStorage.setItem('courseId', onCourseId());
+
+        setTimeout(window.location.href = 'index.html', 500)
+    })
+
+// These RenderFunctions inserts user input data onto Document
+
+function renderPage() {
+    renderHeadingPlayerInfo(localStorage.getItem('playerName'), localStorage.getItem('playerSkill'));
+    renderHeadingPlayerInfo(localStorage.getItem('courseName'), localStorage.getItem('courseId'));
 }
-courseSelectDropdown.onchange = onCourseSelected;
+function renderHeadingPlayerInfo(playerName, playerSkillLevel) {
+    console.log(playerName, playerSkillLevel);
+    let playerHeader = document.createElement('h1');
+    let playerHeaderText = document.createTextNode(`${playerName} - ${playerSkillLevel}`);
 
-async function selectedCourseToPlay(courseId) {
-    const url = `https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course${courseId}.json`;
-    coursePlaying = await
-
-    makeHttpGetRequest(url);
+    playerHeader.appendChild(playerHeaderText);
+    scoreCardContainer.appendChild(playerHeader);
 }
+    function renderHeadingCourseInfo(courseName, courseId) {
+        console.log(courseName, courseId);
+        let courseHeader = document.createElement('h3');
+        let courseHeaderText = document.createTextNode(`${courseName}: id-${courseId}`);
 
-async function makeHttpGetRequest(url) {
-    const response = await fetch(url);
-
-    return response.json();
-}
-
-
-
-function handleClickButtonToCreatePlayer() {
-    const playerName = document.querySelector(Need an html element).value;
-    const playerSkillLevel = document.querySelector(Need an html element).value;
-
-    createPlayer({playerName, playerSkillLevel});
-    renderScoreCardUI();
-}
-
-function createPlayer({playerName, playerSkillLevel}) {
-    const newPlayer = {
-        name: playerName,
-        skill: playerSkillLevel,
-        scores: Array(18).fill(0)
-    };
-    players.push(newPlayer);
-}
-
-function renderScoreCardUI() {
-    
-}
+        courseHeader.appendChild(courseHeaderText);
+        scoreCardContainer.appendChild(courseHeader);
+    }
