@@ -19,6 +19,9 @@ document.addEventListener('submit', function(event) {
 
     currentPlayers[targetPlayerIndexValue].score.push(targetPlayerScoreValue);
     renderPlayerScore(targetPlayerScoreValue, targetPlayerIndexValue)
+
+    targetElementInfo.value = '';
+    
 });
 
    
@@ -134,7 +137,6 @@ function renderTableInformation(api, index) {
         } else if (n <= total - 1) {
             let addDataCell = document.createElement('td')
             let addDataCellText = document.createTextNode(api.holes[n-2].teeBoxes[currentPlayers[index].skillValue].yards)
-            console.log(api.holes[n-2].teeBoxes[currentPlayers[index].skillValue].yards);
             totalYards += Number(addDataCellText.textContent);
 
             let row = document.getElementById(`yardageRow-${currentPlayers[index].id}`);
@@ -228,6 +230,22 @@ function renderTableInformation(api, index) {
             let row = document.getElementById(`playerRow-${currentPlayers[index].id}`);
             addHeaderCell.appendChild(addHeaderCellText);
             row.appendChild(addHeaderCell);
+        } else if (n <= total - 1){
+            let addDataCell = document.createElement('td');
+            addDataCell.setAttribute('id', `playerId:${currentPlayers[index].id}-cellNumber:${n-2}`)
+            let addDataCellText = document.createTextNode('');
+
+            let row = document.getElementById(`playerRow-${currentPlayers[index].id}`);
+            addDataCell.appendChild(addDataCellText);
+            row.appendChild(addDataCell);
+        } else {
+            let addDataCell = document.createElement('td');
+            addDataCell.setAttribute('id', `playerId:${currentPlayers[index].id}-totalCell`)
+            let addDataCellText = document.createTextNode('');
+
+            let row = document.getElementById(`playerRow-${currentPlayers[index].id}`);
+            addDataCell.appendChild(addDataCellText);
+            row.appendChild(addDataCell);
         };
     };
 
@@ -261,12 +279,17 @@ function renderTableInformation(api, index) {
 };
 
 function renderPlayerScore(scoreValue, index) {
-    console.log(scoreValue);
-    console.log(index);
-    let addDataCell = document.createElement('td');
-    let addDataCellText = document.createTextNode(scoreValue);
+    let totalScore = 0;
 
-    let row = document.getElementById(`playerRow-${currentPlayers[index].id}`);
-    addDataCell.appendChild(addDataCellText);
-    row.appendChild(addDataCell);
+    let scoreIndex = currentPlayers[index].score.length - 1;
+    let selectedCell = document.getElementById(`playerId:${currentPlayers[index].id}-cellNumber:${scoreIndex}`);
+
+    selectedCell.innerHTML = scoreValue;
+
+    let totalCell = document.getElementById(`playerId:${currentPlayers[index].id}-totalCell`);
+
+    for ( n = 0; n < currentPlayers[index].score.length; n++) {
+        totalScore += Number(currentPlayers[index].score[n]);
+    }
+    totalCell.innerHTML = totalScore;
 };
