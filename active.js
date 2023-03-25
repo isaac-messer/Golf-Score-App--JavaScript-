@@ -132,4 +132,3 @@ inputForm.addEventListener('submit', function(event) {
 
         setTimeout(window.location.href = 'index.html', 500)
     })
-
