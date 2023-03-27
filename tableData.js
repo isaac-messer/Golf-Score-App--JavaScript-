@@ -36,7 +36,7 @@ document.addEventListener('click', function(event) {
         localStorage.clear();
         
         console.log(findTargetElement);
-        setTimeout(window.location.href = 'userInfo.html', 100);
+        setTimeout(window.location.href = 'index.html', 100);
     };
 })
  

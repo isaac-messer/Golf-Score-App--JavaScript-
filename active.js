@@ -130,5 +130,5 @@ formSubmitButton.addEventListener('click', function() {
     localStorage.setItem('activePlayers', JSON.stringify(currentPlayers));
     localStorage.setItem('activeCourse', JSON.stringify(currentCourse));
 
-    setTimeout(window.location.href = 'index.html', 500)
+    setTimeout(window.location.href = 'scoreCard.html', 500)
 })

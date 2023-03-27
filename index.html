@@ -4,23 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Golf Score App</title>
-
-    <link rel="stylesheet" href="style.css"/>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+    <title>Player Information</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body onload="selectedCourseToPlay(currentCourseData.id)" data-game-body>
-    <div data-course-header-container>
-
-    </div>
-    <div data-score-card-container>
+<body data-player-info-body>
+    <div data-player-info-form-container>
+        <h1>Start Golf Game</h1>
+        <form data-create-form>
+            <label for="numberOfPlayers">Number of Players: </label>
+            <select id="numberOfPlayers" data-number-of-players>
+                <option value="-1">-Select Number of Players-</option>
+                <option value="0">One Player</option>
+                <option value="1">Two Players</option>
+                <option value="2">Three Players</option>
+                <option value="3">Four Players</option>
+            </select>
+            <div data-player-names-input>
+                <SPan></SPan>
+            </div>
+            <label for="courseSelect">Choose a Golf Course: </label>
+            <br>
+            <select id="courseSelect" data-course-dropdown>
+                <option value="0">-Select a Course-</option>
+                <option value="11819">Thanksgiving Point</option>
+                <option value="18300">Fox Hollow</option>
+                <option value="19002">Spanish Oaks</option>
+            </select>
+            <br>
+            <label for="playerSkill">Player Skill Level: </label>
+            <br>
+            <select id="playerSkill" data-player-Skill-dropdown>
+                <option value="4">-Select a Skill Level-</option>
+                <option value="0">Pro</option>
+                <option value="1">Champion</option>
+                <option value="2">Men</option>
+                <option value="3">Women</option>
         
+            </select>
+            <br>
+            
+            <input type="submit" value="Submit" data-from-submit-button>
+        </form>
     </div>
-    <script defer src="tableData.js"></script>
+    
+    <script defer src="active.js"></script>
 </body>
 </html>
