@@ -1,0 +1,136 @@
+head, body, div, h1, h2, h3, table, tr, th, td, a, p {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body[data-game-body] {
+    width: 100%;
+    background-color: #dadada;
+    border-bottom: 1px solid #215250;
+
+    div[data-course-header-container] {
+        display: flex;
+        background-color: #225452;
+
+        h1 {
+            padding: 1.5vh;
+            color: #fff;
+            flex: 1;
+        }
+        input[type='button'] {
+            float: right;
+            border-style: none;
+            border-left: 1px solid #215250;
+            background-color: #27605E;
+            color: #fff;
+        }
+    }
+    div[data-score-card-container] {
+        width: 90%;
+        margin: 3vh 5%;
+        padding: 2vw;
+        border: 1px solid black;
+        border-radius: 5%;
+        background-color: #fff;
+
+        div {
+            padding-bottom: 1vh;
+
+            h3 {
+                font-size: 3vw;
+            }
+            table {
+                width: 100%;
+                border: 1px solid #000;
+                tr {
+
+                    th {
+                        width: 10%;
+                        padding: .5vh;
+                        border: 1px solid #000;
+                        font-size: 1.25vw;
+                        text-align: center;
+                    }
+                    td {                  
+                        border: 1px solid #000;
+                        font-size: 1.25vw;
+                        text-align: center;
+                    }
+                }
+            }
+
+        }
+        .scoreForm {
+            width: 100%;
+
+            margin-bottom: 4vh;
+
+            label {
+                font-size: 1.25vw;
+                font-weight: bold;
+            }
+            input[type='text'] {
+                margin: 0 1vw;
+                border: 1px solid black;
+            }
+            input[type='submit'] {
+                border-style: none;
+                background-color: #fff;
+                border: 1px solid #000;
+            }
+
+        }
+
+    }
+}
+
+body[data-player-info-body] {
+    width: 100%;
+    background-color: #225452;
+    display: flex;
+    justify-content: center;
+
+    div[data-player-info-form-container]{
+        position: absolute;
+        width: 40%;
+        top: 10%;
+        text-align: center;
+
+        h1 {
+            color: #fff;
+            font-size: 4vw;
+        }
+
+        form[data-create-form] {
+            padding: 15%;
+            border: 2px solid #000;
+            border-radius: 10%;
+            background-color: #fff;
+            text-align: center;
+
+            label {
+                font-size: 2.9vw;
+                font-weight: lighter;
+            }
+            select {
+                width: 25vw;
+                font-size: 2vw;
+                margin-bottom: 3vh;
+            }
+            input[type='text'] {
+                margin-bottom: 5vh;
+                font-size: 1.5vw;
+            }
+            input[type='submit'] {
+                padding: 1%;
+                border-style: none;
+                font-size: 2vw;
+                border: 1px solid black;
+                background-color: #fff;
+                border-radius: 10%;
+            }
+        
+        }
+    }
+}

@@ -1,1 +1,119 @@
-/*# sourceMappingURL=style.css.map */
+head, body, div, h1, h2, h3, table, tr, th, td, a, p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body[data-game-body] {
+  width: 100%;
+  background-color: #dadada;
+  border-bottom: 1px solid #215250;
+}
+body[data-game-body] div[data-course-header-container] {
+  display: flex;
+  background-color: #225452;
+}
+body[data-game-body] div[data-course-header-container] h1 {
+  padding: 1.5vh;
+  color: #fff;
+  flex: 1;
+}
+body[data-game-body] div[data-course-header-container] input[type=button] {
+  float: right;
+  border-style: none;
+  border-left: 1px solid #215250;
+  background-color: #27605E;
+  color: #fff;
+}
+body[data-game-body] div[data-score-card-container] {
+  width: 90%;
+  margin: 3vh 5%;
+  padding: 2vw;
+  border: 1px solid black;
+  border-radius: 5%;
+  background-color: #fff;
+}
+body[data-game-body] div[data-score-card-container] div {
+  padding-bottom: 1vh;
+}
+body[data-game-body] div[data-score-card-container] div h3 {
+  font-size: 3vw;
+}
+body[data-game-body] div[data-score-card-container] div table {
+  width: 100%;
+  border: 1px solid #000;
+}
+body[data-game-body] div[data-score-card-container] div table tr th {
+  width: 10%;
+  padding: 0.5vh;
+  border: 1px solid #000;
+  font-size: 1.25vw;
+  text-align: center;
+}
+body[data-game-body] div[data-score-card-container] div table tr td {
+  border: 1px solid #000;
+  font-size: 1.25vw;
+  text-align: center;
+}
+body[data-game-body] div[data-score-card-container] .scoreForm {
+  width: 100%;
+  margin-bottom: 4vh;
+}
+body[data-game-body] div[data-score-card-container] .scoreForm label {
+  font-size: 1.25vw;
+  font-weight: bold;
+}
+body[data-game-body] div[data-score-card-container] .scoreForm input[type=text] {
+  margin: 0 1vw;
+  border: 1px solid black;
+}
+body[data-game-body] div[data-score-card-container] .scoreForm input[type=submit] {
+  border-style: none;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+body[data-player-info-body] {
+  width: 100%;
+  background-color: #225452;
+  display: flex;
+  justify-content: center;
+}
+body[data-player-info-body] div[data-player-info-form-container] {
+  position: absolute;
+  width: 40%;
+  top: 10%;
+  text-align: center;
+}
+body[data-player-info-body] div[data-player-info-form-container] h1 {
+  color: #fff;
+  font-size: 4vw;
+}
+body[data-player-info-body] div[data-player-info-form-container] form[data-create-form] {
+  padding: 15%;
+  border: 2px solid #000;
+  border-radius: 10%;
+  background-color: #fff;
+  text-align: center;
+}
+body[data-player-info-body] div[data-player-info-form-container] form[data-create-form] label {
+  font-size: 2.9vw;
+  font-weight: lighter;
+}
+body[data-player-info-body] div[data-player-info-form-container] form[data-create-form] select {
+  width: 25vw;
+  font-size: 2vw;
+  margin-bottom: 3vh;
+}
+body[data-player-info-body] div[data-player-info-form-container] form[data-create-form] input[type=text] {
+  margin-bottom: 5vh;
+  font-size: 1.5vw;
+}
+body[data-player-info-body] div[data-player-info-form-container] form[data-create-form] input[type=submit] {
+  padding: 1%;
+  border-style: none;
+  font-size: 2vw;
+  border: 1px solid black;
+  background-color: #fff;
+  border-radius: 10%;
+}/*# sourceMappingURL=style.css.map */
