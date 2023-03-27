@@ -117,18 +117,18 @@ function renderNameInputForm (number) {
 inputForm.addEventListener('submit', function(event) {
     event.preventDefault();
 })
-    formSubmitButton.addEventListener('click', function() {
-        for (n = 0; n <= onNumberOfPlayers(); n++) {
-            addPlayer(onPlayerName(n), onPlayerSkill(), onPlayerSkillValue(), onPlayerId());
-        };
-        selectedCourseInfo(onCourseName(), onCourseId());
-        
-        console.log('Form Submitted');
-        console.log(currentPlayers);
-        console.log(currentCourse);
+formSubmitButton.addEventListener('click', function() {
+    for (n = 0; n <= onNumberOfPlayers(); n++) {
+        addPlayer(onPlayerName(n), onPlayerSkill(), onPlayerSkillValue(), onPlayerId());
+    };
+    selectedCourseInfo(onCourseName(), onCourseId());
+    
+    console.log('Form Submitted');
+    console.log(currentPlayers);
+    console.log(currentCourse);
 
-        localStorage.setItem('activePlayers', JSON.stringify(currentPlayers));
-        localStorage.setItem('activeCourse', JSON.stringify(currentCourse));
+    localStorage.setItem('activePlayers', JSON.stringify(currentPlayers));
+    localStorage.setItem('activeCourse', JSON.stringify(currentCourse));
 
-        setTimeout(window.location.href = 'index.html', 500)
-    })
+    setTimeout(window.location.href = 'index.html', 500)
+})
