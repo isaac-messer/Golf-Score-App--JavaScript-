@@ -1,3 +1,4 @@
+const courseNameHeaderContainer = document.querySelector('[data-course-header-container]')
 const scoreCardContainer = document.querySelector('[data-score-card-container]');
 
 let currentPlayers = JSON.parse(localStorage.getItem('activePlayers')); 
@@ -17,14 +18,28 @@ document.addEventListener('submit', function(event) {
     let targetPlayerIndexValue = targetElementInfo.getAttribute('data');
     let targetPlayerScoreValue = targetElementInfo.value
 
-    currentPlayers[targetPlayerIndexValue].score.push(targetPlayerScoreValue);
-    renderPlayerScore(targetPlayerScoreValue, targetPlayerIndexValue)
+    if (targetPlayerScoreValue === '') {
+        console.log('Not a Number');
+    } else {
+        currentPlayers[targetPlayerIndexValue].score.push(targetPlayerScoreValue);
+        renderPlayerScore(targetPlayerScoreValue, targetPlayerIndexValue)
+    }
 
     targetElementInfo.value = '';
     
 });
 
-   
+document.addEventListener('click', function(event) {
+    const findTargetElement = event.target.id;
+
+    if (findTargetElement === 'clearGameButton') {
+        localStorage.clear();
+        
+        console.log(findTargetElement);
+        setTimeout(window.location.href = 'userInfo.html', 100);
+    };
+})
+ 
 
 const selectedCourseToPlay = async (courseId) =>{
     const response = await fetch(`https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course${courseId}.json`);
@@ -35,7 +50,7 @@ const selectedCourseToPlay = async (courseId) =>{
 };
 
 function renderPage(api) {
-    renderHeadingCourseInfo(currentCourseData.name, currentCourseData.id);
+    renderHeadingCourseInfo(currentCourseData.name, currentPlayers[0].skill);
 
     for (i = 0; i < currentPlayers.length; i++) {
         renderHeadingPlayerInfo(currentPlayers[i].name, currentPlayers[i].skill, currentPlayers[i].skillValue, i);
@@ -49,22 +64,29 @@ function renderHeadingPlayerInfo(playerName, playerSkillLevel, playerSkillValue,
     let playerContainer = document.createElement('div')
     playerContainer.setAttribute('id', playerIndex);
     let playerHeader = document.createElement('h3');
-    let playerHeaderText = document.createTextNode(`${playerName} - ${playerSkillLevel}`);
+    let playerHeaderText = document.createTextNode(`${playerName}`);
 
     playerHeader.appendChild(playerHeaderText);
     playerContainer.appendChild(playerHeader)
     scoreCardContainer.appendChild(playerContainer);
 };
 
-function renderHeadingCourseInfo(courseName, courseId) {
-    console.log(courseName, courseId);
+function renderHeadingCourseInfo(courseName, courseSkill) {
+    console.log(courseName);
 
     let courseHeader = document.createElement('h1');
-    let courseHeaderText = document.createTextNode(`${courseName}: id-${courseId}`);
+    let courseHeaderText = document.createTextNode(`${courseName}- ${courseSkill}`);
 
     courseHeader.appendChild(courseHeaderText);
-    scoreCardContainer.appendChild(courseHeader);
+    courseNameHeaderContainer.appendChild(courseHeader);
 
+    let clearGameButton = document.createElement('input');
+    clearGameButton.setAttribute('type', 'button');
+    clearGameButton.setAttribute('id', 'clearGameButton');
+    clearGameButton.setAttribute('value', 'End Game');
+    
+    
+    courseNameHeaderContainer.appendChild(clearGameButton);
 };
 
 function renderTable(api, index) {
@@ -251,7 +273,7 @@ function renderTableInformation(api, index) {
 
     function renderScoreInput(index) {
         let scoreForm = document.createElement('form');
-        scoreForm.setAttribute('data', 'score-from-input');
+        scoreForm.classList.add('scoreForm');
         scoreForm.setAttribute('id', `${currentPlayers[index].id}`);
 
         let scoreLabel = document.createElement('label');
@@ -272,7 +294,7 @@ function renderTableInformation(api, index) {
         scoreLabel.appendChild(scoreInput);
         scoreLabel.appendChild(scoreSubmit);
         scoreForm.appendChild(scoreLabel);
-        table.appendChild(scoreForm);
+        scoreCardContainer.appendChild(scoreForm);
     };
 
     renderScoreInput(index);
@@ -280,16 +302,36 @@ function renderTableInformation(api, index) {
 
 function renderPlayerScore(scoreValue, index) {
     let totalScore = 0;
+    let playerName = currentPlayers[index].name.split(' ').join('');
 
-    let scoreIndex = currentPlayers[index].score.length - 1;
-    let selectedCell = document.getElementById(`playerId:${currentPlayers[index].id}-cellNumber:${scoreIndex}`);
+    if (currentPlayers[index].score.length > 18) {
+        let totalCell = document.getElementById(`playerId:${currentPlayers[index].id}-totalCell`);
+        for ( n = 0; n <= 17; n++) {
+                totalScore += Number(currentPlayers[index].score[n]);
+        }
+        totalCell.innerHTML = totalScore;
+        alert(`Score Box is Full. ${playerName}'s final score was ${totalScore}`);
+    } else {
+        if (scoreValue === '') {
+        console.log('Not a Number');
 
-    selectedCell.innerHTML = scoreValue;
+        } else {
+            let scoreIndex = currentPlayers[index].score.length - 1;
+            let selectedCell = document.getElementById(`playerId:${currentPlayers[index].id}-cellNumber:${scoreIndex}`);
+            selectedCell.innerHTML = scoreValue;
+            let totalCell = document.getElementById(`playerId:${currentPlayers[index].id}-totalCell`);
+            for ( n = 0; n < currentPlayers[index].score.length; n++) {
+                totalScore += Number(currentPlayers[index].score[n]);
+            }
+            totalCell.innerHTML = totalScore;
 
-    let totalCell = document.getElementById(`playerId:${currentPlayers[index].id}-totalCell`);
-
-    for ( n = 0; n < currentPlayers[index].score.length; n++) {
-        totalScore += Number(currentPlayers[index].score[n]);
+        }
+        if (currentPlayers[index].score.length == 18) {
+            alert(`Congratulations ${playerName}! Your final score was ${totalScore}`), 100;
+        }
     }
-    totalCell.innerHTML = totalScore;
+
+    
+
+
 };
